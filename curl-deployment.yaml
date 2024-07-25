@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: curl
+  labels:
+    run: curl
+spec:
+  replicas: 1
+  selector:
+      matchLabels:
+        run: curl
+  template:
+    metadata:
+      labels:
+        run: curl
+    spec:
+      containers:
+      - name: curl
+        image: radial/busyboxplus:curl
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      preemptionPolicy: PreemptLowerPriority
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      serviceAccount: default
+      serviceAccountName: default
+      terminationGracePeriodSeconds: 30   
