@@ -15,15 +15,6 @@ spec:
       labels:
         run: curl
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: karpenter.sh/registered
-                operator: In
-                values:
-                - "true"
       containers:
       - name: curl
         image: radial/busyboxplus:curl

@@ -13,6 +13,15 @@ spec:
       labels:
         run: my-nginx
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: karpenter.sh/registered
+                operator: In
+                values:
+                - "true"
       containers:
       - name: my-nginx
         image: nginx
