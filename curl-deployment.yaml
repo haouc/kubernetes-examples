@@ -20,10 +20,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: karpenter.sh/registered
-                operator: In
-                values:
-                - "true"
+              - key: karpenter.sh/nodepool
+                operator: Exists
       containers:
       - name: curl
         image: radial/busyboxplus:curl

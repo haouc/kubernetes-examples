@@ -18,10 +18,8 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: karpenter.sh/registered
-                operator: In
-                values:
-                - "true"
+              - key: karpenter.sh/nodepool
+                operator: Exists
       containers:
       - name: my-nginx
         image: nginx
