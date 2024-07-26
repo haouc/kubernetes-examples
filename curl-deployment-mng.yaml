@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: curl
+  name: curl-mng
   namespace: networking
   labels:
     run: curl
@@ -15,6 +15,13 @@ spec:
       labels:
         run: curl
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: karpenter.sh/nodepool
+                operator: DoesNotExist
       containers:
       - name: curl
         image: radial/busyboxplus:curl
